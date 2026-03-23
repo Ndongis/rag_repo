@@ -193,20 +193,19 @@ def generate_answer(question: str, results: list[dict]) -> str:
 def initialize():
     global _model, _llm, _embeddings, _metadata
 
-    # 1. Cloner le repo
+    print("=== STEP 1 : clone repo ===")
     if GITHUB_RAG_REPO:
         clone_or_pull()
     else:
         print("WARN : GITHUB_RAG_REPO non défini.")
 
-    # 2. Charger le modèle (déjà téléchargé dans le Dockerfile)
-    print(f"Chargement du modèle {EMBED_MODEL}...")
+    print("=== STEP 2 : load model ===")
     _model = SentenceTransformer(EMBED_MODEL)
 
-    # 3. Embeddings (depuis cache ou recalcul)
+    print("=== STEP 3 : build embeddings ===")
     _embeddings, _metadata = load_or_build()
 
-    # 4. Gemini
+    print("=== STEP 4 : configure Gemini ===")
     if GEMINI_API_KEY:
         genai.configure(api_key=GEMINI_API_KEY)
         _llm = genai.GenerativeModel("gemini-1.5-flash")
@@ -214,8 +213,7 @@ def initialize():
     else:
         print("WARN : GEMINI_API_KEY non définie.")
 
-    print(f"RAG prêt — {len(_metadata)} oeuvres indexées.")
-
+    print(f"=== READY : {len(_metadata)} oeuvres indexées ===")
 
 # ── Handler RunPod ────────────────────────────────────────────────────────────
 
