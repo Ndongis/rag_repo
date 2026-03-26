@@ -293,8 +293,16 @@ import json
 from fastapi import FastAPI, Request
 from pydantic import BaseModel
 import uvicorn
-api = FastAPI()
+from fastapi.middleware.cors import CORSMiddleware
 
+api = FastAPI()
+# Ajouter juste après la création de l'app
+api.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 class QueryRequest(BaseModel):
     question: str
     oeuvre_id: str = ""
