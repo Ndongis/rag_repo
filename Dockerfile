@@ -1,4 +1,4 @@
-FROM runpod/base:1.0.3-cuda1290-ubuntu2204
+FROM runpod/base:0.6.2-cpu
 
 RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
 
