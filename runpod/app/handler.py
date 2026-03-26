@@ -207,7 +207,7 @@ def initialize():
     print("=== STEP 4 : configure Gemini ===")
     if GEMINI_API_KEY:
         genai.configure(api_key=GEMINI_API_KEY)
-        _llm = genai.GenerativeModel("gemini-1.5-flash-latest")
+        _llm = genai.GenerativeModel("gemini-2.5-flash")
         print("Gemini configuré.")
     else:
         print("WARN : GEMINI_API_KEY non définie.")
