@@ -53,12 +53,11 @@ _metadata:   list[dict] = []
 def clone_or_pull():
     if os.path.exists(f"{REPO_DIR}/.git"):
         print("Mise à jour du repo...")
-        subprocess.run(["git", "-C", REPO_DIR, "pull"], check=True)
+        subprocess.run(["git", "-C", REPO_DIR, "fetch", "origin"], check=True)
+        subprocess.run(["git", "-C", REPO_DIR, "reset", "--hard", "origin/main"], check=True)
     else:
         print(f"Clonage de {GITHUB_RAG_REPO}...")
         subprocess.run(["git", "clone", "--depth=1", GITHUB_RAG_REPO, REPO_DIR], check=True)
-
-
 # ── CSV ───────────────────────────────────────────────────────────────────────
 
 def read_csv(filename: str) -> list[dict]:
