@@ -289,9 +289,10 @@ if __name__ == "__main__":
 """
 
 # Remplacer le démarrage RunPod par FastAPI pour un pod
-from fastapi import FastAPI
+import json
+from fastapi import FastAPI, Request
 from pydantic import BaseModel
-
+import uvicorn
 api = FastAPI()
 
 class QueryRequest(BaseModel):
